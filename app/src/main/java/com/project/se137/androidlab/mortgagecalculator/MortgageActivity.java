@@ -4,15 +4,39 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 public class MortgageActivity extends FragmentActivity {
+    EditText homeValueEditText;
+    EditText downPaymentEditText;
+    EditText interestRateEditText;
+    EditText propertyTaxEditText;
+    Spinner termsSpinner;
+    TextView monthlyPaymentTextView;
+    TextView interestPaidTextView;
+    TextView propertyTaxPaidTextView;
+    TextView payOffTextView;
+    TextView errorTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mortgage);
 
+        //Get refernces to all widgets
+        homeValueEditText = (EditText)findViewById(R.id.home_value_edit_text);
+        downPaymentEditText = (EditText)findViewById(R.id.down_payment_edit_text);
+        interestRateEditText = (EditText)findViewById(R.id.apr_edit_text);
+        propertyTaxEditText = (EditText)findViewById(R.id.tax_rate_edit_text);
+        termsSpinner = (Spinner)findViewById(R.id.terms_spinner);
+        monthlyPaymentTextView = (TextView)findViewById(R.id.monthly_payment_text_view);
+        interestPaidTextView = (TextView)findViewById(R.id.total_interest_paid_text_view);
+        propertyTaxPaidTextView = (TextView)findViewById(R.id.total_tax_paid_text_view);
+        payOffTextView = (TextView)findViewById(R.id.pay_off_date_text_view);
+        errorTextView = (TextView)findViewById(R.id.error_text_view);
     }
 
     @Override
@@ -23,5 +47,56 @@ public class MortgageActivity extends FragmentActivity {
         return true;
     }
 
+    // Resets all items in the activity to their default state
+    public void reset(View view){
+        homeValueEditText.setText("");
+        downPaymentEditText.setText("");
+        interestRateEditText.setText("");
+        propertyTaxEditText.setText("");
+        termsSpinner.setSelection(0);
+        monthlyPaymentTextView.setText("");
+        interestPaidTextView.setText("");
+        propertyTaxPaidTextView.setText("");
+        payOffTextView.setText("");
+        errorTextView.setText("");
+    }
 
+    //Calculates the mortgage values
+    public void calc(View view){
+        //Checks for errors and aborts calculation if errors exist
+        if(isError()){
+            return;
+        }
+
+        // Inputs
+        float homeValue = Float.valueOf(homeValueEditText.getText().toString());
+        float downPayment = Float.valueOf(downPaymentEditText.getText().toString());
+        float interestRate = Float.valueOf(interestRateEditText.getText().toString());
+        float propertyTax = Float.valueOf(propertyTaxEditText.getText().toString());
+        int term = Integer.parseInt(termsSpinner.getSelectedItem().toString());
+
+        // Outputs
+        float monthlyPayment;
+        float interestPaid;
+        float propertyTaxPaid;
+        int payOff;
+
+        // Calculations go here
+
+        // Display the calculated values
+        monthlyPaymentTextView.setText(monthlyPayment);
+        interestPaidTextView.setText(interestPaid);
+        propertyTaxPaidTextView.setText(propertyTaxPaid);
+        payOffTextView.setText(payOff);
+    }
+
+    //Checks all error conditions before calculations and displays error messages
+    private boolean isError(){
+        if(homeValueEditText.getText().toString().equals("")){
+            errorTextView.setText("Enter your home value");
+            return true;
+        }
+
+        return false;
+    }
 }
