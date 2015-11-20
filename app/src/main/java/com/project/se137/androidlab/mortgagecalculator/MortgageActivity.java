@@ -82,12 +82,13 @@ public class MortgageActivity extends FragmentActivity {
         int payOff;
 
         // Calculations go here
+        Mortgage mortgage = new Mortgage(homeValue, downPayment, interestRate, propertyTax, term);
 
         // Display the calculated values
-        monthlyPaymentTextView.setText(monthlyPayment);
-        interestPaidTextView.setText(interestPaid);
-        propertyTaxPaidTextView.setText(propertyTaxPaid);
-        payOffTextView.setText(payOff);
+        monthlyPaymentTextView.setText(Double.toString(mortgage.getMonthlyPayment()));
+        interestPaidTextView.setText(Double.toString(mortgage.getTotalInterest()));
+        propertyTaxPaidTextView.setText(Double.toString(mortgage.getTotalPropertyTax()));
+        payOffTextView.setText(mortgage.getPayoffDate().toString());
     }
 
     //Checks all error conditions before calculations and displays error messages
@@ -95,6 +96,9 @@ public class MortgageActivity extends FragmentActivity {
         if(homeValueEditText.getText().toString().equals("")){
             errorTextView.setText("Enter your home value");
             return true;
+        }
+        if(interestRateEditText.toString().equals("")){
+            errorTextView.setText("Input an interest rate");
         }
 
         return false;
