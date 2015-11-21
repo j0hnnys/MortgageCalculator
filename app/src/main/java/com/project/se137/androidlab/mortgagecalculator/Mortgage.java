@@ -1,5 +1,6 @@
 package com.project.se137.androidlab.mortgagecalculator;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -16,15 +17,14 @@ public class Mortgage {
     int termInMonths;
 
     public Mortgage(float homeValue, float downPayment, float interestRate, float propertyTax, int termInYears) {
-        this.homeValue = homeValue;
-        this.downPayment = downPayment;
-        this.interestRate = interestRate/100;
-        this.propertyTax = propertyTax;
+        this.homeValue = homeValue - downPayment;
+        this.interestRate = (interestRate/100)/12;
+        this.propertyTax = propertyTax/100;
         this.termInMonths = termInYears*12;
     }
 
     public double getMonthlyPayment(){
-        return homeValue*(interestRate * Math.pow((1+interestRate), termInMonths)/(Math.pow((1+interestRate), termInMonths))-1);
+        return homeValue*(interestRate * Math.pow((1+interestRate), termInMonths)/((Math.pow((1+interestRate), termInMonths))-1));
     }
 
     public double getTotalInterest() {
@@ -39,6 +39,7 @@ public class Mortgage {
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         cal.add(Calendar.MONTH, termInMonths);
-        return cal.get(Calendar.MONTH) + " " + cal.get(Calendar.YEAR);
+        SimpleDateFormat format = new SimpleDateFormat("MMMM dd, yyyy");
+        return format.format(cal.getTime());
     }
 }

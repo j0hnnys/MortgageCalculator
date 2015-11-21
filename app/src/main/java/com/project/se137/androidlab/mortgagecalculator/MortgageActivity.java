@@ -91,10 +91,6 @@ public class MortgageActivity extends FragmentActivity {
             errorTextView.setText("Invalid home value amount");
             return true;
         }
-        if(downPaymentEditText.getText().toString().equals("") || Float.valueOf(downPaymentEditText.getText().toString()).isNaN()){
-            errorTextView.setText("Invalid down payment amount");
-            return true;
-        }
         if(interestRateEditText.getText().toString().equals("") || Float.valueOf(interestRateEditText.getText().toString()).isNaN()){
             errorTextView.setText("Invalid interest rate");
             return true;
@@ -102,6 +98,9 @@ public class MortgageActivity extends FragmentActivity {
         if(propertyTaxEditText.getText().toString().equals("") || Float.valueOf(propertyTaxEditText.getText().toString()).isNaN()){
             errorTextView.setText("Invalid property tax");
             return true;
+        }
+        if(downPaymentEditText.getText().toString().equals("") || Float.valueOf(downPaymentEditText.getText().toString()).isNaN()){
+            downPaymentEditText.setText("0");
         }
 
         return false;
