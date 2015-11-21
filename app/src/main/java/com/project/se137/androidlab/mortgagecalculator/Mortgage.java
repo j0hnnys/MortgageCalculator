@@ -15,12 +15,12 @@ public class Mortgage {
     float propertyTax;
     int termInMonths;
 
-    public Mortgage(float homeValue, float downPayment, float interestRate, float propertyTax, int termInMonths) {
+    public Mortgage(float homeValue, float downPayment, float interestRate, float propertyTax, int termInYears) {
         this.homeValue = homeValue;
         this.downPayment = downPayment;
         this.interestRate = interestRate/100;
         this.propertyTax = propertyTax;
-        this.termInMonths = termInMonths*12;
+        this.termInMonths = termInYears*12;
     }
 
     public double getMonthlyPayment(){
@@ -32,15 +32,13 @@ public class Mortgage {
     }
 
     public double getTotalPropertyTax() {
-        return 0;
+        return Math.pow((1+propertyTax), termInMonths);
     }
 
-    public Calendar getPayoffDate() {
+    public String getPayoffDate() {
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         cal.add(Calendar.MONTH, termInMonths);
-        return cal;
+        return cal.get(Calendar.MONTH) + " " + cal.get(Calendar.YEAR);
     }
-
-
 }

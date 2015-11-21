@@ -75,12 +75,6 @@ public class MortgageActivity extends FragmentActivity {
         float propertyTax = Float.valueOf(propertyTaxEditText.getText().toString());
         int term = Integer.parseInt(termsSpinner.getSelectedItem().toString());
 
-        // Outputs
-        float monthlyPayment;
-        float interestPaid;
-        float propertyTaxPaid;
-        int payOff;
-
         // Calculations go here
         Mortgage mortgage = new Mortgage(homeValue, downPayment, interestRate, propertyTax, term);
 
@@ -88,17 +82,26 @@ public class MortgageActivity extends FragmentActivity {
         monthlyPaymentTextView.setText(Double.toString(mortgage.getMonthlyPayment()));
         interestPaidTextView.setText(Double.toString(mortgage.getTotalInterest()));
         propertyTaxPaidTextView.setText(Double.toString(mortgage.getTotalPropertyTax()));
-        payOffTextView.setText(mortgage.getPayoffDate().toString());
+        payOffTextView.setText(mortgage.getPayoffDate());
     }
 
     //Checks all error conditions before calculations and displays error messages
     private boolean isError(){
-        if(homeValueEditText.getText().toString().equals("")){
-            errorTextView.setText("Enter your home value");
+        if(homeValueEditText.getText().toString().equals("") || Float.valueOf(homeValueEditText.getText().toString()).isNaN()){
+            errorTextView.setText("Invalid home value amount");
             return true;
         }
-        if(interestRateEditText.toString().equals("")){
-            errorTextView.setText("Input an interest rate");
+        if(downPaymentEditText.getText().toString().equals("") || Float.valueOf(downPaymentEditText.getText().toString()).isNaN()){
+            errorTextView.setText("Invalid down payment amount");
+            return true;
+        }
+        if(interestRateEditText.getText().toString().equals("") || Float.valueOf(interestRateEditText.getText().toString()).isNaN()){
+            errorTextView.setText("Invalid interest rate");
+            return true;
+        }
+        if(propertyTaxEditText.getText().toString().equals("") || Float.valueOf(propertyTaxEditText.getText().toString()).isNaN()){
+            errorTextView.setText("Invalid property tax");
+            return true;
         }
 
         return false;
