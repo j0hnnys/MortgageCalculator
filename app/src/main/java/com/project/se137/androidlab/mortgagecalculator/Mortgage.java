@@ -11,7 +11,6 @@ import java.util.GregorianCalendar;
 public class Mortgage {
 
     float homeValue;
-    float downPayment;
     float interestRate;
     float propertyTax;
     int termInMonths;
@@ -24,15 +23,17 @@ public class Mortgage {
     }
 
     public double getMonthlyPayment(){
-        return homeValue*(interestRate * Math.pow((1+interestRate), termInMonths)/((Math.pow((1+interestRate), termInMonths))-1));
+        return homeValue *  ((interestRate * Math.pow((1+interestRate), termInMonths))/
+                            ((Math.pow((1+interestRate), termInMonths))-1));
     }
 
     public double getTotalInterest() {
-        return Math.pow((1+interestRate), termInMonths);
+        return homeValue *  ((((interestRate * termInMonths * Math.pow((1+interestRate), termInMonths))/
+                            ((Math.pow((1+interestRate), termInMonths))-1))) - 1);
     }
 
     public double getTotalPropertyTax() {
-        return Math.pow((1+propertyTax), termInMonths);
+        return homeValue * Math.pow((1+propertyTax), termInMonths);
     }
 
     public String getPayoffDate() {

@@ -79,9 +79,9 @@ public class MortgageActivity extends FragmentActivity {
         Mortgage mortgage = new Mortgage(homeValue, downPayment, interestRate, propertyTax, term);
 
         // Display the calculated values
-        monthlyPaymentTextView.setText(Double.toString(mortgage.getMonthlyPayment()));
-        interestPaidTextView.setText(Double.toString(mortgage.getTotalInterest()));
-        propertyTaxPaidTextView.setText(Double.toString(mortgage.getTotalPropertyTax()));
+        monthlyPaymentTextView.setText(String.format("%.2f", mortgage.getMonthlyPayment()));
+        interestPaidTextView.setText(String.format("%.2f", mortgage.getTotalInterest()));
+        propertyTaxPaidTextView.setText(String.format("%.2f", mortgage.getTotalPropertyTax()));
         payOffTextView.setText(mortgage.getPayoffDate());
     }
 

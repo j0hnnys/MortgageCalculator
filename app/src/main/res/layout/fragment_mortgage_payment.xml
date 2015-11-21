@@ -23,6 +23,7 @@
             android:id="@+id/total_tax_paid_text_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:layout_weight="2" />
         <TextView
             android:text="$"
@@ -45,6 +46,7 @@
             android:id="@+id/total_interest_paid_text_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:layout_weight="2" />
         <TextView
             android:text="$"
@@ -67,6 +69,7 @@
             android:id="@+id/monthly_payment_text_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:layout_weight="2" />
         <TextView
             android:text="$"
@@ -89,6 +92,7 @@
             android:id="@+id/pay_off_date_text_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:layout_weight="2" />
         <TextView
             android:textSize="30sp"
