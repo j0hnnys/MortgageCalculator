@@ -33,7 +33,7 @@ public class Mortgage {
     }
 
     public double getTotalPropertyTax() {
-        return homeValue * Math.pow((1+propertyTax), termInMonths);
+        return homeValue * (propertyTax/12) * termInMonths;
     }
 
     public String getPayoffDate() {
